@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 from django.views.generic import ListView, DetailView
 
-from imdb.models import Movie, Genres
+from .models import Movie, Genres
 
 
 class MainPage(ListView):

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from views import MainPage, MovieDetail, MoviesByGenre
+from .views import MainPage, MovieDetail, MoviesByGenre
 
 urlpatterns = [
     path('', MainPage.as_view(), name='home'),
