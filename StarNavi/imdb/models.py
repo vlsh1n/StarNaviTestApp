@@ -29,4 +29,4 @@ class Genres(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse_lazy('genres', kwargs={'genre': self.title})
+        return reverse_lazy('genres', kwargs={'genre_id': self.pk})

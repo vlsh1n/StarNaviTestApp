@@ -1,0 +1,22 @@
+{% extends 'imdb/index.html' %}
+
+{% block title %} {{ movie.title }} | StarNavi {% endblock %}
+
+{% block content %}
+
+<div class="col-md-8 blog-main">
+  <div class="card-body">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{ movie.title }}</h2>
+      <p class="blog-post-meta">
+        Release date: {{ movie.release_date }} | Genre: {{ movie.genre }}
+      </p>
+      <p>{{ movie.description }}</p>
+      <p class="blog-post-meta">
+        Duration: {{ movie.duration }} min | Likes: {{ movie.rating }}
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

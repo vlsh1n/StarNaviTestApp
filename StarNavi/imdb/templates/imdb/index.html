@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    {% block title %}<title>StarNavi</title>{% endblock %}
+    <title>{% block title %} {{ title }} {% endblock %}</title>
 
 </head>
 
@@ -34,24 +34,24 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     {% for genre in genres %}
-                    <a class="dropdown-item" href="{{ genre.get_absolute_url|lower }}">{{ genre.title }}</a>
+                    <a class="dropdown-item" href="{{ genre.get_absolute_url }}">{{ genre.title }}</a>
                     {% endfor %}
                 </div>
             </li>
         </ul>
-        </div>
+    </div>
 
-            <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                <a href="#" class="btn btn-outline-warning" role="button" aria-pressed="true">Add Movie</a>
-                <a href="#" class="btn btn-outline-danger" role="button" aria-pressed="true">Log Out</a>
-                {% endif %}
+    <div class="navbar-nav">
+        {% if user.is_authenticated %}
+        <a href="#" class="btn btn-outline-warning" role="button" aria-pressed="true">Add Movie</a>
+        <a href="#" class="btn btn-outline-danger" role="button" aria-pressed="true">Log Out</a>
+        {% endif %}
 
-                {% if not user.is_authenticated %}
-                <a href="#" class="btn btn-outline-success" role="button" aria-pressed="true">Sign Up</a>
-                <a href="#" class="btn btn-outline-info" role="button" aria-pressed="true">Sign In</a>
-                {% endif %}
-            </div>
+        {% if not user.is_authenticated %}
+        <a href="#" class="btn btn-outline-success" role="button" aria-pressed="true">Sign Up</a>
+        <a href="#" class="btn btn-outline-info" role="button" aria-pressed="true">Sign In</a>
+        {% endif %}
+    </div>
 </nav>
 
 {% endblock %}
