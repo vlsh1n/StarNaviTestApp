@@ -9,7 +9,7 @@ class Movie(models.Model):
     release_date = models.DateField()
     genre = models.ForeignKey('Genres', null=True, on_delete=models.SET_NULL)
     duration = models.IntegerField()
-    description = models.CharField(max_length=1000)
+    description = models.TextField(max_length=1000)
     rating = models.IntegerField()
 
     class Meta:
