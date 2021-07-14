@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     release_date = models.DateField()
-    genre = models.ForeignKey('Genres', on_delete=models.SET_NULL)
+    genre = models.ForeignKey('Genres', null=True, on_delete=models.SET_NULL)
     duration = models.IntegerField()
     description = models.CharField(max_length=1000)
     rating = models.IntegerField()
@@ -23,7 +23,7 @@ class Movie(models.Model):
 
 
 class Genres(models.Model):
-    title = models.CharField()
+    title = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
