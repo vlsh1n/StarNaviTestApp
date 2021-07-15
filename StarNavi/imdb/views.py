@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .forms import AddMovieForm
 from .models import Movie, Genres
 
 
@@ -42,4 +45,16 @@ class MovieDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(MovieDetail, self).get_context_data()
         context['genres'] = Genres.objects.all()
+        return context
+
+
+class AddMovie(LoginRequiredMixin, CreateView):
+    form_class = AddMovieForm
+    template_name = 'imdb/add_movie.html'
+    success_url = reverse_lazy('home')
+    login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super(AddMovie, self).get_context_data()
+        context['title'] = 'Add movie | StarNavi'
         return context
