@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'imdb.apps.ImdbConfig',
     'users.apps.UsersConfig',
     'rest_framework',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
