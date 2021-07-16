@@ -4,9 +4,11 @@ from imdb.models import Movie, Genres
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='movie_detail')
+
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = ('title', 'url', 'release_date', 'genre', 'duration', 'description', 'rating')
 
 
 class GenreSerializer(serializers.ModelSerializer):
