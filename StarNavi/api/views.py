@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from django_rest.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser
 
 from rest_framework import views, status
 
@@ -91,4 +91,6 @@ class UserViewSet(ModelViewSet):
     queryset = model.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAdminUser, )
+
+
 
