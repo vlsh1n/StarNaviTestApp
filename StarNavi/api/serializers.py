@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from imdb.models import Movie, Genres
 
+from django.contrib.auth import get_user_model
+
 
 class MovieSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='movie_detail')
@@ -21,3 +23,20 @@ class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genres
         fields = ('title', 'url')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        queryset = model.objects.all()
+        fields = ('id', 'email', 'password', 'username', 'is_superuser')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = self.Meta.model(**validated_data)
+        user.save()
+        return user
+
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data.pop('password', ''))
+        return super().update(instance, validated_data)
