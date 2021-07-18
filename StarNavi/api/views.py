@@ -10,8 +10,12 @@ from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
 from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 
+from .permissions import IsAuthorOrReadOnly
+
 
 class MovieListView(views.APIView):
+    permission_classes = (IsAuthorOrReadOnly, )
+
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
 
@@ -42,6 +46,8 @@ class GenreListView(ListModelMixin, CreateModelMixin, GenericAPIView):
 
 
 class MovieDetailView(views.APIView):
+    permission_classes = (IsAuthorOrReadOnly, )
+
     def get_object(self, pk):
         try:
             return Movie.objects.get(pk=pk)
