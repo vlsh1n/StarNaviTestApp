@@ -12,7 +12,7 @@ class Movie(models.Model):
     genre = models.ForeignKey('Genres', null=True, on_delete=models.SET_NULL)
     duration = models.IntegerField()
     description = models.TextField(max_length=1000)
-    rating = models.IntegerField()
+    rating = models.PositiveIntegerField()
 
     class Meta:
         ordering = ['rating']
