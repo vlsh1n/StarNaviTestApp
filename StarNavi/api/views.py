@@ -1,10 +1,16 @@
+from django.contrib.auth import get_user_model
+
+from django_rest.permissions import IsAdminUser
+
 from rest_framework import views, status
 
 from rest_framework.response import Response
 
+from rest_framework.viewsets import ModelViewSet
+
 from imdb.models import Movie, Genres
 
-from .serializers import MovieSerializer, GenreSerializer
+from .serializers import MovieSerializer, GenreSerializer, UserSerializer
 
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
@@ -78,3 +84,11 @@ class MovieDetailView(views.APIView):
 class GenreDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Genres.objects.all()
     serializer_class = GenreSerializer
+
+
+class UserViewSet(ModelViewSet):
+    model = get_user_model()
+    queryset = model.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminUser, )
+
