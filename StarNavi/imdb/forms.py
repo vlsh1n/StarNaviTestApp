@@ -9,8 +9,7 @@ class AddMovieForm(forms.ModelForm):
     release_date = forms.DateField(label='Release Date', widget=forms.SelectDateWidget(attrs={'class': 'form-control'})),
     description = forms.CharField(label='Description', widget=forms.Textarea(attrs={'class': 'form-control'})),
     duration = forms.IntegerField(label='Duration', widget=forms.NumberInput(attrs={'class': 'form-control'})),
-    rating = forms.IntegerField(label='Rating', widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Movie
-        fields = ('title', 'genre', 'release_date', 'description', 'duration', 'rating')
+        fields = ('title', 'genre', 'release_date', 'description', 'duration')
