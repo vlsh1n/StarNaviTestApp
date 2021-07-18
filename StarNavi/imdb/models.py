@@ -7,7 +7,7 @@ from users.models import User
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False)
     release_date = models.DateField()
     genre = models.ForeignKey('Genres', null=True, on_delete=models.SET_NULL)
     duration = models.IntegerField()
