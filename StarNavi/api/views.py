@@ -6,6 +6,10 @@ from imdb.models import Movie, Genres
 
 from .serializers import MovieSerializer, GenreSerializer
 
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
+
+from rest_framework.generics import GenericAPIView
+
 
 class MovieListView(views.APIView):
     def get(self, request, format=None):
@@ -23,18 +27,15 @@ class MovieListView(views.APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GenreListView(views.APIView):
-    def get(self, request, format=None):
-        genres = Genres.objects.all()
-        serializer = GenreSerializer(genres, many=True)
-        return Response(serializer.data)
+class GenreListView(ListModelMixin, CreateModelMixin, GenericAPIView):
+    queryset = Genres.objects.all()
+    serializer_class = GenreSerializer
 
-    def post(self, request, format=None):
-        serializer = GenreSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class MovieDetailView(views.APIView):
