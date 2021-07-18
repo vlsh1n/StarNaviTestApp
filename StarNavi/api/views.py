@@ -91,6 +91,3 @@ class UserViewSet(ModelViewSet):
     queryset = model.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAdminUser, )
-
-
-
