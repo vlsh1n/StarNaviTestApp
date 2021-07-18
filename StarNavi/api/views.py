@@ -8,7 +8,7 @@ from .serializers import MovieSerializer, GenreSerializer
 
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 
 
 class MovieListView(views.APIView):
@@ -64,3 +64,8 @@ class MovieDetailView(views.APIView):
         movie = self.get_object(pk)
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GenreDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Genres.objects.all()
+    serializer_class = GenreSerializer

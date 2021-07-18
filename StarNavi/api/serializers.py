@@ -12,6 +12,8 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
 class GenreSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='genre_detail')
+
     class Meta:
         model = Genres
-        fields = '__all__'
+        fields = ('title', 'url')
