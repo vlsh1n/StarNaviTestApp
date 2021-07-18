@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('imdb.urls')),
     path('users/', include('users.urls')),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('api-auth/', include('rest_framework.urls', 'rest_framework'))
 ]
