@@ -12,6 +12,9 @@ from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 
 
 class MovieListView(views.APIView):
+    def perform_create(self, serializer):
+        return serializer.save(author=self.request.user)
+
     def get(self, request, format=None):
         movies = Movie.objects.all()
         context = {'request': request}
