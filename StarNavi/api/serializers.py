@@ -10,6 +10,7 @@ from imdb import services
 class MovieSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField(read_only=True)
     is_fan = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
 
     def get_author(self, obj):
         return obj.author.id
@@ -18,9 +19,12 @@ class MovieSerializer(serializers.ModelSerializer):
         user = self.context.get('request').user
         return services.is_fan(obj, user)
 
+    def get_id(self, obj):
+        return obj.pk
+
     class Meta:
         model = Movie
-        fields = ('title', 'author', 'release_date', 'genre', 'duration', 'description', 'total_likes', 'is_fan')
+        fields = ('title', 'id', 'author', 'release_date', 'genre', 'duration', 'description', 'total_likes', 'is_fan')
 
 
 class GenreSerializer(serializers.ModelSerializer):
