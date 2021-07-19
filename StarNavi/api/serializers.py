@@ -4,17 +4,23 @@ from imdb.models import Movie, Genres
 
 from django.contrib.auth import get_user_model
 
+from imdb import services
+
 
 class MovieSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='movie_detail')
     author = serializers.SerializerMethodField(read_only=True)
+    is_fan = serializers.SerializerMethodField()
 
     def get_author(self, obj):
         return obj.author.id
 
+    def get_is_fan(self, obj):
+        user = self.context.get('request').user
+        return services.is_fan(obj, user)
+
     class Meta:
         model = Movie
-        fields = ('title', 'url', 'author', 'release_date', 'genre', 'duration', 'description', 'rating')
+        fields = ('title', 'author', 'release_date', 'genre', 'duration', 'description', 'total_likes', 'is_fan')
 
 
 class GenreSerializer(serializers.ModelSerializer):
