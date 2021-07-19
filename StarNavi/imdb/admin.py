@@ -6,7 +6,7 @@ from .models import Movie, Genres
 
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'genre', 'rating')
+    list_display = ('id', 'title', 'genre', 'total_likes')
     list_display_links = ('id', 'title')
     list_filter = ('genre',)
     save_on_top = True
